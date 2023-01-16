@@ -162,5 +162,5 @@ if __name__ == '__main__':
     # Creating csv files
     daily_dataset = dataset_daily_reports(data_mycloud, data_iteminfo, data_itemtrend, data_zabbix, data_cockpit)
     daily_dataset.to_csv('data/final_data/daily_reports_dataset.csv')
-    server_wise_dataset = server_wise_dataset(daily_dataset)
-    server_wise_dataset.to_csv('data/final_data/server_wise_dataset.csv')
+    server_wise_dataset_df = server_wise_dataset(daily_dataset)
+    server_wise_dataset_df.to_csv('data/final_data/server_wise_dataset.csv')
