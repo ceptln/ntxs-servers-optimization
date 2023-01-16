@@ -1,0 +1,110 @@
+{
+    "CPU_UNDERSIZED": {
+        "Prod": {
+            "MAX_N_CPU": 16,
+            "MIN_DAYS_WITH_SATURATION": 10,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Bench": {
+            "MAX_N_CPU": 16,
+            "MIN_DAYS_WITH_SATURATION": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Test": {
+            "MAX_N_CPU": 16,
+            "MIN_DAYS_WITH_SATURATION": 50,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Dev": {
+            "MAX_N_CPU": 16,
+            "MIN_DAYS_WITH_SATURATION": 50,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "UAT": {
+            "MAX_N_CPU": 16,
+            "MIN_DAYS_WITH_SATURATION": 40,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        }
+    },
+    "CPU_OVERSIZED": {
+        "Prod": {
+            "MIN_N_CPU": 1,
+            "MAX_DAYS_WITH_SATURATION": 5,
+            "MAX_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Bench": {
+            "MIN_N_CPU": 1,
+            "MAX_DAYS_WITH_SATURATION": 5,
+            "MAX_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Test": {
+            "MIN_N_CPU": 1,
+            "MAX_DAYS_WITH_SATURATION": 10,
+            "MAX_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Dev": {
+            "MIN_N_CPU": 1,
+            "MAX_DAYS_WITH_SATURATION": 10,
+            "MAX_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "UAT": {
+            "MIN_N_CPU": 1,
+            "MAX_DAYS_WITH_SATURATION": 10,
+            "MAX_ANNUAL_DAILY_AVERAGE": 20
+        }
+    },
+    "RAM_UNDERSIZED": {
+        "Prod": {
+            "MAX_N_RAM": 128,
+            "MIN_DAYS_WITH_MAX_OVER97": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Bench": {
+            "MAX_N_RAM": 128,
+            "MIN_DAYS_WITH_MAX_OVER97": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Test": {
+            "MAX_N_RAM": 128,
+            "MIN_DAYS_WITH_MAX_OVER97": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "Dev": {
+            "MAX_N_RAM": 128,
+            "MIN_DAYS_WITH_MAX_OVER97": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        },
+        "UAT": {
+            "MAX_N_RAM": 128,
+            "MIN_DAYS_WITH_MAX_OVER97": 30,
+            "MIN_ANNUAL_DAILY_AVERAGE": 20
+        }
+    },
+    "RAM_OVERSIZED": {
+        "Prod": {
+            "MIN_N_RAM": 2,
+            "MAX_DAYS_WITH_MAX_OVER97": 30,
+            "MAX_ANNUAL_DAILY_AVERAGE": 30
+        },
+        "Bench": {
+            "MIN_N_RAM": 2,
+            "MAX_DAYS_WITH_MAX_OVER97": 30,
+            "MAX_ANNUAL_DAILY_AVERAGE": 30
+        },
+        "Test": {
+            "MIN_N_RAM": 2,
+            "MAX_DAYS_WITH_MAX_OVER97": 30,
+            "MAX_ANNUAL_DAILY_AVERAGE": 30
+        },
+        "Dev": {
+            "MIN_N_RAM": 2,
+            "MAX_DAYS_WITH_MAX_OVER97": 30,
+            "MAX_ANNUAL_DAILY_AVERAGE": 30
+        },
+        "UAT": {
+            "MIN_N_RAM": 2,
+            "MAX_DAYS_WITH_MAX_OVER97": 30,
+            "MAX_ANNUAL_DAILY_AVERAGE": 30
+        }
+    }
+}
