@@ -1,7 +1,6 @@
 import pandas as pd
 import os
-import datetime
-from utils import weekday_num_to_letters, server_wise_dataset, closest, dataset_daily_reports
+from utils import server_wise_dataset, dataset_daily_reports
 
 
 # Get raw data
