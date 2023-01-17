@@ -390,9 +390,7 @@ if run:
     
     if data is None:
         data = pd.read_csv('default_input_files/server_wise_dataset.csv')
-
-    st.header("Results")
-
+    
     # Run the steps from servers_list.py without exporting the CSV
     # Filtering dataset to get CPU, RAM oversized & undersized
     # CPU undersized
@@ -407,15 +405,105 @@ if run:
     cpu_oversized = utils.add_columns_config_changes(cpu_oversized, undersized=False, cpu_bool=True, config_dict=config_dict)
     ram_oversized = utils.add_columns_config_changes(ram_oversized, undersized=False, cpu_bool=False, config_dict=config_dict)
 
+    both_oversized = pd.concat([cpu_oversized, ram_oversized]).drop_duplicates(subset='name_server')
+    len_both_oversized = both_oversized[both_oversized.both == True].shape[0]
+    both_undersized = pd.concat([cpu_undersized, ram_undersized]).drop_duplicates(subset='name_server')
+    len_both_undersized = both_undersized[both_undersized.both == True].shape[0]
+
     # Create dataframe with all server and prices evolution
-    cpu_u_for_join = cpu_undersized[['name_server', 'key', 'Price', 'new_config']]
-    cpu_o_for_join = cpu_oversized[['name_server', 'key', 'Price', 'new_config']]
-    ram_u_for_join = ram_undersized[['name_server', 'key', 'Price', 'new_config']]
-    ram_o_for_join = ram_oversized[['name_server', 'key', 'Price', 'new_config']]
+    cpu_u_for_join = cpu_undersized[['name_server', 'key', 'Price', 'value_avg_mean_cpu', 'value_avg_mean_mem', 'new_config', 'new_avg_mean_CPU', 'new_avg_mean_RAM']]
+    cpu_o_for_join = cpu_oversized[['name_server', 'key', 'Price', 'value_avg_mean_cpu', 'value_avg_mean_mem','new_config', 'new_avg_mean_CPU', 'new_avg_mean_RAM']]
+    ram_u_for_join = ram_undersized[['name_server', 'key', 'Price', 'value_avg_mean_cpu', 'value_avg_mean_mem','new_config', 'new_avg_mean_CPU', 'new_avg_mean_RAM']]
+    ram_o_for_join = ram_oversized[['name_server', 'key', 'Price', 'value_avg_mean_cpu', 'value_avg_mean_mem', 'new_config', 'new_avg_mean_CPU', 'new_avg_mean_RAM']]
 
     all_changes = pd.concat([cpu_u_for_join, cpu_o_for_join, ram_u_for_join, ram_o_for_join], axis=0).drop_duplicates(subset='name_server')
     all_changes = all_changes.merge(data_mycloud[['key', 'Price']], left_on='new_config', right_on='key', how='left', suffixes=['_old', '_new'])
     all_changes['price_delta'] =  all_changes['Price_new'] - all_changes['Price_old']
+
+    st.header("Key figures")
+
+    # create three columns
+    kpi11, kpi12, kpi13 = st.columns(3)
+
+    # fill in those three columns with respective metrics or KPIs
+    kpi11.metric(
+        label="Number of CPU oversized",
+        value=cpu_oversized.shape[0]
+    )
+    kpi12.metric(
+        label="Number of RAM oversized",
+        value=ram_oversized.shape[0],
+    )
+    kpi13.metric(
+        label="Both oversized",
+        value=len_both_oversized,
+    )
+    st.text('')
+    # create three columns
+    kpi21, kpi22, kpi23 = st.columns(3)
+
+    # fill in those three columns with respective metrics or KPIs
+    kpi21.metric(
+        label="Number of CPU undersized",
+        value=cpu_undersized.shape[0]
+    )
+
+    kpi22.metric(
+        label="Number of RAM undersized",
+        value=ram_undersized.shape[0]
+    )
+
+    kpi23.metric(
+        label="Both undersized",
+        value=len_both_undersized,
+    )
+    st.text('')
+    # create three columns
+    kpi31, kpi32, kpi33 = st.columns(3)
+
+    # fill in those three columns with respective metrics or KPIs
+    kpi31.metric(
+        label="Average of formerly oversized (CPU)",
+        value=f"{cpu_oversized.new_avg_mean_CPU.mean():.2f} %",
+        delta=f"{cpu_oversized.new_avg_mean_CPU.mean() - cpu_oversized.value_avg_mean_cpu.mean():.2f} pts",
+    )
+
+    kpi32.metric(
+        label="Average of formerly undersized (CPU)",
+        value=f"{cpu_undersized.new_avg_mean_CPU.mean():.2f} %",
+        delta=f"{cpu_undersized.new_avg_mean_CPU.mean() - cpu_undersized.value_avg_mean_cpu.mean():.2f} pts",
+    )
+
+    kpi33.metric(
+        label="Most used configuration",
+        value=f"{all_changes.new_config.mode()[0]}",
+        delta=f"Previous: {all_changes.key_old.mode()[0]}",
+    )
+
+    st.text('')
+    # create three columns
+    kpi41, kpi42, kpi43 = st.columns(3)
+
+    # fill in those three columns with respective metrics or KPIs
+    kpi41.metric(
+        label="Average of formerly oversized (RAM)",
+        value=f"{ram_oversized.new_avg_mean_RAM.mean():.2f} %",
+        delta=f"{ram_oversized.new_avg_mean_RAM.mean() - ram_oversized.value_avg_mean_mem.mean():.2f} pts",
+    )
+
+    kpi42.metric(
+        label="Average of formerly undersized (RAM)",
+        value=f"{ram_undersized.new_avg_mean_RAM.mean():.2f} %",
+        delta=f"{ram_undersized.new_avg_mean_RAM.mean() - ram_undersized.value_avg_mean_mem.mean():.2f} pts",
+    )
+
+    kpi43.metric(
+        label="Total Price",
+        value=f"{all_changes.Price_new.sum():.2f} €",
+        delta=f"{all_changes.price_delta.sum():.2f} €",
+    )
+
+    st.header("Results")
 
     st.dataframe(data=all_changes, width=None, height=None, use_container_width=True)
 
