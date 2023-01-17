@@ -7,7 +7,7 @@ N_CPU_MAX_VALUE = 16
 N_RAM_MIN_VALUE = 2
 N_RAM_MAX_VALUE = 128
 
-def create_servers_list(data: pd.DataFrame, config_dict: dict)-> tuple[pd.DataFrame]:
+def create_servers_list(data: pd.DataFrame, config_dict: dict)-> Tuple[pd.DataFrame]:
     """
     Create dataframes of servers that are undersized or oversized
     Input:
