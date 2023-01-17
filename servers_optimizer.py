@@ -391,7 +391,7 @@ if run:
     if data is None:
         data = pd.read_csv('default_input_files/server_wise_dataset.csv')
 
-    st.markdown(f"<h4 style='text-align: left;'>Results</h4>", unsafe_allow_html=True)
+    st.header("Results")
 
     # Run the steps from servers_list.py without exporting the CSV
     # Filtering dataset to get CPU, RAM oversized & undersized
@@ -416,10 +416,13 @@ if run:
     all_changes = pd.concat([cpu_u_for_join, cpu_o_for_join, ram_u_for_join, ram_o_for_join], axis=0).drop_duplicates(subset='name_server')
     all_changes = all_changes.merge(data_mycloud[['key', 'Price']], left_on='new_config', right_on='key', how='left', suffixes=['_old', '_new'])
     all_changes['price_delta'] =  all_changes['Price_new'] - all_changes['Price_old']
-    
+
+    st.dataframe(data=all_changes, width=None, height=None, use_container_width=True)
+
     csv = all_changes.to_csv(index=False).encode('utf-8')
-    st.download_button(
-        "Press to Download",
+    cols = st.columns(3)
+    cols[1].download_button(
+        "Download the csv file here",
         csv,
         "optimized_config.csv",
         "text/csv",
