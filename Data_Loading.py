@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 from utils import dataset_daily_reports, server_wise_dataset
 
+col1, col2, col3 = st.columns(3)
+col1.write("")
+col2.image(
+    ".streamlit/natixis.png",
+    width=200,
+)
+col3.write("")
+
 st.markdown(f"<h1 style='text-align: center;'>Data loading</h1>", unsafe_allow_html=True)
 
 cockpit_file = st.file_uploader("Upload the cockpit file", type=["csv"])

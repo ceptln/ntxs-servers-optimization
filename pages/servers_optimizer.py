@@ -3,10 +3,6 @@ import pandas as pd
 import json
 import utils
 
-# This code is different for each deployed app.
-CURRENT_THEME = "blue"
-IS_DARK_THEME = True
-
 col1, col2, col3 = st.columns(3)
 col1.write("")
 col2.image(
