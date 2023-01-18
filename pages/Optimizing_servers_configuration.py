@@ -11,7 +11,7 @@ col2.image(
 )
 col3.write("")
 
-st.markdown(f"<h1 style='text-align: center;'>Servers Optimizer</hc1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: center;'>SERVERS OPTIMIZER</hc1>", unsafe_allow_html=True)
 
 # Upload server wise CSV file
 st.header("Upload the Servers file")

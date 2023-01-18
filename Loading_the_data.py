@@ -10,7 +10,7 @@ col2.image(
 )
 col3.write("")
 
-st.markdown(f"<h1 style='text-align: center;'>Data loading</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: center;'>DATA LOADING</h1>", unsafe_allow_html=True)
 
 cockpit_file = st.file_uploader("Upload the cockpit file", type=["csv"])
 item_info_file = st.file_uploader("Upload the item info file", type=["csv"])
