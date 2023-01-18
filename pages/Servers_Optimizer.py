@@ -405,7 +405,7 @@ if run:
         data = pd.read_csv('default_input_files/server_wise_dataset.csv')
 
     else:
-        data = pd.read_csv("data")
+        data = pd.read_csv(data)
     
     # Run the steps from servers_list.py without exporting the CSV
     # Filtering dataset to get CPU, RAM oversized & undersized
