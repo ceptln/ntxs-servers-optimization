@@ -35,6 +35,18 @@ if all([my_cloud_file, item_info_file, item_trend_file, tmp_hosts_zabbix_file, c
         daily_dataset = dataset_daily_reports(data_mycloud, data_iteminfo, data_itemtrend, data_zabbix, data_cockpit)
         daily_dataset.to_csv('data/final_data/daily_reports_dataset.csv')
         server_wise_dataset_df = server_wise_dataset(daily_dataset, data_cockpit)
-        server_wise_dataset_df.to_csv('data/final_data/server_wise_dataset.csv')
+        # server_wise_dataset_df.to_csv('data/final_data/server_wise_dataset.csv')
 
-    st.success("Done! Created files can be found at data/final_data")
+    st.success("Done! You can download the csv file")
+
+    st.dataframe(data=server_wise_dataset_df, width=None, height=None, use_container_width=True)
+
+    csv = server_wise_dataset_df.to_csv(index=False).encode('utf-8')
+    cols = st.columns(3)
+    cols[1].download_button(
+        "Download the csv file here 📂",
+        csv,
+        "optimized_config.csv",
+        "text/csv",
+        key='download-csv',
+    )
