@@ -38,33 +38,34 @@ tmp_hosts_zabbix_file = st.file_uploader("Upload the zabbix file", type=["csv"])
 
 if all([my_cloud_file, item_info_file, item_trend_file, tmp_hosts_zabbix_file, cockpit_file]):
 
-    with st.spinner("Creating dataset..."):
+    if st.button("Create dataset"):
+        with st.spinner("Creating dataset..."):
 
-        data_mycloud = pd.read_csv(my_cloud_file).drop(columns=['Unnamed: 0'])
+            data_mycloud = pd.read_csv(my_cloud_file).drop(columns=['Unnamed: 0'])
 
-        data_iteminfo = pd.read_csv(item_info_file).drop(columns=['Unnamed: 0'])
+            data_iteminfo = pd.read_csv(item_info_file).drop(columns=['Unnamed: 0'])
 
-        data_itemtrend = pd.read_csv(item_trend_file).drop(columns=['Unnamed: 0'])
+            data_itemtrend = pd.read_csv(item_trend_file).drop(columns=['Unnamed: 0'])
 
-        data_zabbix = pd.read_csv(tmp_hosts_zabbix_file).drop(columns=['Unnamed: 0'])
+            data_zabbix = pd.read_csv(tmp_hosts_zabbix_file).drop(columns=['Unnamed: 0'])
 
-        data_cockpit = pd.read_csv(cockpit_file).drop(columns=['Unnamed: 0']).drop_duplicates(subset=['name_server'])
+            data_cockpit = pd.read_csv(cockpit_file).drop(columns=['Unnamed: 0']).drop_duplicates(subset=['name_server'])
 
-        daily_dataset = dataset_daily_reports(data_mycloud, data_iteminfo, data_itemtrend, data_zabbix, data_cockpit)
-        daily_dataset.to_csv('data/final_data/daily_reports_dataset.csv')
-        server_wise_dataset_df = server_wise_dataset(daily_dataset, data_cockpit)
-        # server_wise_dataset_df.to_csv('data/final_data/server_wise_dataset.csv')
+            daily_dataset = dataset_daily_reports(data_mycloud, data_iteminfo, data_itemtrend, data_zabbix, data_cockpit)
+            daily_dataset.to_csv('data/final_data/daily_reports_dataset.csv')
+            server_wise_dataset_df = server_wise_dataset(daily_dataset, data_cockpit)
+            # server_wise_dataset_df.to_csv('data/final_data/server_wise_dataset.csv')
 
-    st.success("Done! You can download the csv file")
+        st.success("Done! You can download the csv file")
 
-    st.dataframe(data=server_wise_dataset_df, width=None, height=None, use_container_width=True)
+        st.dataframe(data=server_wise_dataset_df, width=None, height=None, use_container_width=True)
 
-    csv = server_wise_dataset_df.to_csv(index=False).encode('utf-8')
-    cols = st.columns(3)
-    cols[1].download_button(
-        "Download the csv file here 📂",
-        csv,
-        "optimized_config.csv",
-        "text/csv",
-        key='download-csv',
-    )
+        csv = server_wise_dataset_df.to_csv(index=False).encode('utf-8')
+        cols = st.columns(3)
+        cols[1].download_button(
+            "Download the csv file here 📂",
+            csv,
+            "server_wise_dataset.csv",
+            "text/csv",
+            key='download-csv',
+        )
