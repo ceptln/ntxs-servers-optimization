@@ -494,14 +494,14 @@ if run:
     # fill in those three columns with respective metrics or KPIs
     kpi31.metric(
         label="Average of formerly oversized (CPU)",
-        value=f"{cpu_oversized.new_avg_mean_CPU.mean():.2f} %",
-        delta=f"{cpu_oversized.new_avg_mean_CPU.mean() - cpu_oversized.value_avg_mean_cpu.mean():.2f} pts",
+        value=f"{cpu_oversized.new_avg_mean_CPU.mean():.1f} %",
+        delta=f"{cpu_oversized.new_avg_mean_CPU.mean() - cpu_oversized.value_avg_mean_cpu.mean():.1f} pts",
     )
 
     kpi32.metric(
         label="Average of formerly undersized (CPU)",
-        value=f"{cpu_undersized.new_avg_mean_CPU.mean():.2f} %",
-        delta=f"{cpu_undersized.new_avg_mean_CPU.mean() - cpu_undersized.value_avg_mean_cpu.mean():.2f} pts",
+        value=f"{cpu_undersized.new_avg_mean_CPU.mean():.1f} %",
+        delta=f"{cpu_undersized.new_avg_mean_CPU.mean() - cpu_undersized.value_avg_mean_cpu.mean():.1f} pts",
     )
 
     kpi33.metric(
@@ -517,20 +517,20 @@ if run:
     # fill in those three columns with respective metrics or KPIs
     kpi41.metric(
         label="Average of formerly oversized (RAM)",
-        value=f"{ram_oversized.new_avg_mean_RAM.mean():.2f} %",
-        delta=f"{ram_oversized.new_avg_mean_RAM.mean() - ram_oversized.value_avg_mean_mem.mean():.2f} pts",
+        value=f"{ram_oversized.new_avg_mean_RAM.mean():.1f} %",
+        delta=f"{ram_oversized.new_avg_mean_RAM.mean() - ram_oversized.value_avg_mean_mem.mean():.1f} pts",
     )
 
     kpi42.metric(
         label="Average of formerly undersized (RAM)",
-        value=f"{ram_undersized.new_avg_mean_RAM.mean():.2f} %",
-        delta=f"{ram_undersized.new_avg_mean_RAM.mean() - ram_undersized.value_avg_mean_mem.mean():.2f} pts",
+        value=f"{ram_undersized.new_avg_mean_RAM.mean():.1f} %",
+        delta=f"{ram_undersized.new_avg_mean_RAM.mean() - ram_undersized.value_avg_mean_mem.mean():.1f} pts",
     )
 
     kpi43.metric(
         label="Total Price",
-        value="{:,.2f} €".format(all_changes.Price_new.sum()),
-        delta="{:,.2f} €".format(all_changes.price_delta.sum()),
+        value="{:,.0f} k€".format((all_changes.Price_new.sum() / 1000).round()),
+        delta="{:,.0f} k€".format((all_changes.price_delta.sum() / 1000).round()),
     )
 
     st.text("")
