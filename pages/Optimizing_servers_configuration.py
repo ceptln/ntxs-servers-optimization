@@ -3,6 +3,24 @@ import pandas as pd
 import json
 import utils
 
+### SIDEBAR
+# for i in range(8):
+#     st.sidebar.title(" ")
+st.sidebar.markdown(f"<h3 style='text-align: left;'>💻 Our work</h3>", unsafe_allow_html=True)
+st.sidebar.info("GitHub Repository: <https://github.com/ceptln/ntxs-servers-optimization>")
+
+st.sidebar.markdown(f"<h3 style='text-align: left;'>📬 Contact</h3>", unsafe_allow_html=True)
+markdown = """
+camille.epitalon@hec.edu
+charles.proye@hec.edu
+martin.quievre@hec.edu
+nathan.aim@hec.edu
+sarah.mayer@hec.edu
+"""
+st.sidebar.info(markdown)
+
+
+### MAIN PAGE
 col1, col2, col3 = st.columns(3)
 col1.write("")
 col2.image(
@@ -479,14 +497,14 @@ if run:
     # fill in those three columns with respective metrics or KPIs
     kpi31.metric(
         label="Average of formerly oversized (CPU)",
-        value=f"{cpu_oversized.new_avg_mean_CPU.mean():.2f} %",
-        delta=f"{cpu_oversized.new_avg_mean_CPU.mean() - cpu_oversized.value_avg_mean_cpu.mean():.2f} pts",
+        value=f"{cpu_oversized.new_avg_mean_CPU.mean():.1f} %",
+        delta=f"{cpu_oversized.new_avg_mean_CPU.mean() - cpu_oversized.value_avg_mean_cpu.mean():.1f} pts",
     )
 
     kpi32.metric(
         label="Average of formerly undersized (CPU)",
-        value=f"{cpu_undersized.new_avg_mean_CPU.mean():.2f} %",
-        delta=f"{cpu_undersized.new_avg_mean_CPU.mean() - cpu_undersized.value_avg_mean_cpu.mean():.2f} pts",
+        value=f"{cpu_undersized.new_avg_mean_CPU.mean():.1f} %",
+        delta=f"{cpu_undersized.new_avg_mean_CPU.mean() - cpu_undersized.value_avg_mean_cpu.mean():.1f} pts",
     )
 
     kpi33.metric(
@@ -502,20 +520,20 @@ if run:
     # fill in those three columns with respective metrics or KPIs
     kpi41.metric(
         label="Average of formerly oversized (RAM)",
-        value=f"{ram_oversized.new_avg_mean_RAM.mean():.2f} %",
-        delta=f"{ram_oversized.new_avg_mean_RAM.mean() - ram_oversized.value_avg_mean_mem.mean():.2f} pts",
+        value=f"{ram_oversized.new_avg_mean_RAM.mean():.1f} %",
+        delta=f"{ram_oversized.new_avg_mean_RAM.mean() - ram_oversized.value_avg_mean_mem.mean():.1f} pts",
     )
 
     kpi42.metric(
         label="Average of formerly undersized (RAM)",
-        value=f"{ram_undersized.new_avg_mean_RAM.mean():.2f} %",
-        delta=f"{ram_undersized.new_avg_mean_RAM.mean() - ram_undersized.value_avg_mean_mem.mean():.2f} pts",
+        value=f"{ram_undersized.new_avg_mean_RAM.mean():.1f} %",
+        delta=f"{ram_undersized.new_avg_mean_RAM.mean() - ram_undersized.value_avg_mean_mem.mean():.1f} pts",
     )
 
     kpi43.metric(
         label="Total Price",
-        value="{:,.2f} €".format(all_changes.Price_new.sum()),
-        delta="{:,.2f} €".format(all_changes.price_delta.sum()),
+        value="{:,.0f} k€".format((all_changes.Price_new.sum() / 1000).round()),
+        delta="{:,.0f} k€".format((all_changes.price_delta.sum() / 1000).round()),
     )
 
     st.text("")

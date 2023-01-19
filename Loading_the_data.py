@@ -2,6 +2,24 @@ import streamlit as st
 import pandas as pd
 from utils import dataset_daily_reports, server_wise_dataset
 
+### SIDEBAR
+# for i in range(8):
+#     st.sidebar.title(" ")
+st.sidebar.markdown(f"<h3 style='text-align: left;'>💻 Our work</h3>", unsafe_allow_html=True)
+st.sidebar.info("GitHub Repository: <https://github.com/ceptln/ntxs-servers-optimization>")
+
+st.sidebar.markdown(f"<h3 style='text-align: left;'>📬 Contact</h3>", unsafe_allow_html=True)
+markdown = """
+camille.epitalon@hec.edu
+charles.proye@hec.edu
+martin.quievre@hec.edu
+nathan.aim@hec.edu
+sarah.mayer@hec.edu
+"""
+st.sidebar.info(markdown)
+
+
+### MAIN PAGE
 col1, col2, col3 = st.columns(3)
 col1.write("")
 col2.image(
