@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import json
-import utils
+import models.utils as utils
 
 ### SIDEBAR
 # for i in range(8):
@@ -41,7 +41,7 @@ st.header("Set up the parameters")
 st.markdown(f"<p style='color:#333333'>You have the choice here: manually set up the parameters or upload a config file at the bottom.</p>", unsafe_allow_html=True)
 st.markdown(f"<h4 style='text-align: left;'>CPU Undersized</h4>", unsafe_allow_html=True)
 
-by_default_config_file = open("default_input_files/config_file.json", "r")
+by_default_config_file = open("data/default_input_files/config_file.json", "r")
 json_content = by_default_config_file.read()
 by_default_config_dict = json.loads(json_content)
 
@@ -416,7 +416,7 @@ if run:
             st.markdown(f"<p style='text-align: left;'>The file is not a valid json file. The model used the manually added values.</p>", unsafe_allow_html=True)   
     
     if data is None:
-        data = pd.read_csv('default_input_files/server_wise_dataset.csv')
+        data = pd.read_csv('data/default_input_files/server_wise_dataset.csv')
 
     else:
         data = pd.read_csv(data)
@@ -426,7 +426,7 @@ if run:
     # CPU undersized
     cpu_undersized, cpu_oversized, ram_undersized, ram_oversized = utils.create_servers_list(data, config_dict)
 
-    data_mycloud = pd.read_csv('default_input_files/mycloud_20221221.csv')
+    data_mycloud = pd.read_csv('data/default_input_files/mycloud_20221221.csv')
 
     cpu_undersized, ram_undersized = utils.add_column_CPU_RAM(cpu_undersized, ram_undersized)
     cpu_undersized = utils.add_columns_config_changes(cpu_undersized, undersized=True, cpu_bool=True, config_dict=config_dict)

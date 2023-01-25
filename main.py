@@ -1,5 +1,5 @@
 import pandas as pd
-from utils import dataset_daily_reports, server_wise_dataset, create_servers_list, add_column_CPU_RAM, add_columns_config_changes
+from models.utils import dataset_daily_reports, server_wise_dataset, create_servers_list, add_column_CPU_RAM, add_columns_config_changes
 import json
 
 RAW_DATA_PATH = 'data/raw_data/'
@@ -31,7 +31,7 @@ def optimize_servers(server_wise_dataset_df: pd.DataFrame, config_dict: dict, cs
     
     cpu_undersized, cpu_oversized, ram_undersized, ram_oversized = create_servers_list(server_wise_dataset_df, config_dict)
 
-    data_mycloud = pd.read_csv('default_input_files/mycloud_20221221.csv')
+    data_mycloud = pd.read_csv('data/default_input_files/mycloud_20221221.csv')
 
     cpu_undersized, ram_undersized = add_column_CPU_RAM(cpu_undersized, ram_undersized)
     cpu_undersized = add_columns_config_changes(cpu_undersized, undersized=True, cpu_bool=True, config_dict=config_dict)
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     server_wise_dataset_df = create_server_wise_dataset(cockpit_file_path, item_info_file_path, item_trend_file_path, 
                                                        my_cloud_file_path, tmp_hosts_zabbix_file_path, csv_export=False)
     # Load the default config file                                                   
-    by_default_config_file = open("default_input_files/config_file.json", "r")
+    by_default_config_file = open("data/default_input_files/config_file.json", "r")
     by_default_config_dict = json.loads(by_default_config_file.read())
     # Optimize the servers
     all_changes = optimize_servers(server_wise_dataset_df, by_default_config_dict, csv_export=False)

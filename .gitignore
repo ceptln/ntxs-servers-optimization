@@ -1,5 +1,8 @@
 # Heavy data file
-data/
+data/checkpoints/*
+data/excels/*
+data/final_data/*
+data/raw_data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -163,5 +166,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-data/
-explo_nathan.ipynb
+.DS_Store
+.streamlit

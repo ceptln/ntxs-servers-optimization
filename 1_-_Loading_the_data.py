@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils import dataset_daily_reports, server_wise_dataset
+from models.utils import dataset_daily_reports, server_wise_dataset
 
 ### SIDEBAR
 # for i in range(8):
